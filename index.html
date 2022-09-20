@@ -1,0 +1,63 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="shortcut icon" href="https://img.icons8.com/ultraviolet/80/000000/cheap-2.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <title>MI$GASTOS</title>
+</head>
+
+<body>
+    <div class="inicio">
+        <div class="inicioIzquiedo">
+            <div>
+                <h1>Bienvenido/a a MI$GASTOS</h1>
+                <p>Para guardar tus gastos e ingresos.</p>
+            </div>
+            <img src="./img/imgHome.svg" alt="Imagen vector dinero">
+        </div>
+        <div class="inicioDerecho">
+            <div id="login" class="bloqueInicio">
+                <h2>INGRESAR</h2>
+                <formaction="" class="loginForm" id="loginForm">
+                <div class="texto">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" name="usuario" placeholder="usuario" id="loginUser" required>
+                </div>
+                <div class="texto">
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="contraseña" placeholder="contraseña" id="loginPw" required>
+                </div>
+                <button id="botonLogin" class="boton" onclick="entrar()"> Iniciar sesión</button>
+                </form>
+                <div class="quesRegister">
+                    <p>¿No tienes una cuenta? <a id="noCuenta" class="btn-register" > Registrarte</a></p>
+                </div>
+            </div>
+            <div id="register" class="bloqueRegister">
+                <h2>REGISTRARSE</h2>
+                <form id="form" >
+                <div class="texto">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" name="usuario" placeholder="usuario" id="usuario" required>
+                </div>
+                <div class="texto">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="texto">
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="contraseña" placeholder="contraseña" id="pw" required>
+                </div>
+                <button id="botonRegister" class="boton" onclick="registrar()">Registrarse</button>
+                <div class="quesRegister">
+                    <p>¿ya tienes una cuenta? <a id="siCuenta" class="btn-login">Iniciar sesión</a></p>
+                </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script src="script.js"></script>
+</body>
+</html>

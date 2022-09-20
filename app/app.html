@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta nombre="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link rel="stylesheet" href="./estilos.css">
+        <link rel="shortcut icon" href="https://img.icons8.com/ultraviolet/80/000000/cheap-2.png" type="image/x-icon">
+        <title>MI$GASTOS</title>
+    </head>
+    
+    <body>
+        <header>
+            <a href="./index.html"><h1>MI$ GASTOS</h1></a>
+        </header>
+    
+        <main>
+            <div class="container">
+                <div class="bloqueTop">
+                    <p>Saldo total</p>
+                    <div>
+                        <p>$<span id="balance">0</span></p>
+                    </div>
+                </div>
+    
+                <div class="form">
+    
+                    <p>Añadir nueva transacción:</p>
+                    <div class="formRadio">
+                        <label for="type">Tipo:</label>
+                        <div class="radioSelec">
+                            <div class="radio">
+                                <input type="radio" name="type" id="ingresos" checked>
+                                <label for="radio">Ingreso</label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="type" id="gastos">
+                                <label for="radio">Gasto</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formControl">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" placeholder="Ej:Salario,Comida,etc" id="nombre">
+                    </div>
+    
+                    <div class="formControl">
+                        <label for="monto">Monto:</label>
+                        <input type="numer" name="monto" placeholder="Ej:100" id="monto">
+                    </div>
+                    <button class="newTransc" id="guardar">Añadir transacción</button>
+                </div>
+                <h2>Transacciones:</h2>
+    
+                <ul id="lista-transacciones">
+                    <li id="bloqueTransci" class="transaction ingresos">
+                        <p>Ingreso1</p>
+                        <div class="derecha">
+                            <p>$300</p>
+                            <button>
+                                <img
+                                    src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-edit-interface-kiranshastry-solid-kiranshastry.png" />
+                            </button>
+                            <button>
+                                <img src="https://img.icons8.com/pastel-glyph/64/ffffff/trash.png" />
+                            </button>
+                        </div>
+                    </li>
+    
+                    <li id="bloqueTransci" class="transaction gastos">
+                        <p>Gasto1</p>
+                        <div class="derecha">
+                            <p>$300</p>
+                            <button>
+                                <img
+                                    src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-edit-interface-kiranshastry-solid-kiranshastry.png" />
+                            </button>
+                            <button>
+                                <img src="https://img.icons8.com/pastel-glyph/64/ffffff/trash.png" />
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </main>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script src="./app.js"></script>
+    </body>
+    
+    </html>

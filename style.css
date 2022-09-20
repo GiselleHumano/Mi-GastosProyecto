@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;700&family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+    text-align: center;
+}
+
+.inicioDerecho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: none;
+}
+
+.inicioIzquiedo h1 {
+    color: #021B79;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bloqueInicio {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #0575E6;
+    background: -webkit-linear-gradient(to bottom, #0575E6, #021B79);
+    background: linear-gradient(to bottom, #0575E6, #021B79);
+    border-radius: 10px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.bloqueInicio h2 {
+    text-align: center;
+    color: #eef5ff;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.bloqueRegister {
+    width: 50%;
+    padding: 30px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #0575E6;
+    background: -webkit-linear-gradient(to bottom, #0575E6, #021B79);
+    background: linear-gradient(to bottom, #0575E6, #021B79);
+    border-radius: 10px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+#register {
+    display: none;
+}
+
+.bloqueRegister h2 {
+    text-align: center;
+    color: #eef5ff;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.texto {
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.texto input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #CDE0FA;
+    color: #021B79;
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.texto label {
+    color: #CDE0FA;
+    margin-bottom: 10px;
+}
+
+.texto input::placeholder {
+    color: #021c7985;
+}
+
+.boton {
+    width: 100%;
+    padding: 16px 0px 16px 0px;
+    margin: 25px 0px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: #0575E6;
+    color: #EBF2FA;
+    box-shadow: 0px 10px 20px -12px #0c7ae7c2;
+    cursor: pointer;
+}
+
+.quesRegister {
+    padding: 15px 0px 15px 0px;
+    text-align: center;
+}
+
+.quesRegister p {
+    color: #CDE0FA;
+}
+
+.quesRegister a {
+    font-weight: 700;
+    color: #0575E6;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+@media (min-width: 766px) {
+    .inicio {
+        height: 80vh;
+        flex-direction: row;
+    }
+
+    .inicioIzquiedo {
+        text-align: start;
+        width: 50vw;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .inicioIzquiedo h1 {
+        font-size: 3vw;
+    }
+
+    img {
+        height: 65%;
+        padding-top: 20px;
+    }
+
+    .inicioDerecho {
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+    }
+
+}
