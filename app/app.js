@@ -6,6 +6,21 @@ const gastos = document.getElementById("gastos")
 const guardarButton = document.getElementById("guardar")
 const listTransac = document.getElementById("lista-transacciones")
 
+window.onload = () => {
+    Toastify({
+        text: `¡Bienvenid@!`,
+        duration: 3000,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "linear-gradient(to top, #373b44, #4286f4)",
+        },
+        onClick: function () { } // Callback after click
+    }).showToast()
+}
+
 let listaDeTransacciones = [];
 let saldoTotal = 0;
 let editIndex =-1 // para que la transaccion anterior sea remplazada en la edicion
@@ -15,9 +30,9 @@ saldoTotal = Number(localStorage.getItem("balance")) || 0;
 //Edita la transaccion
 function edit (i){
     editIndex = i;
-    nombres.value = users[i].nombre;
-    montos.value = users[i].monto;
-    if(users [i].type === "ingresos"){
+    nombres.value = listaDeTransacciones[i].nombre;
+    montos.value = listaDeTransacciones[i].monto;
+    if(listaDeTransacciones [i].type === "ingresos"){
         ingresos.checked = true;
     }
     else{
@@ -27,7 +42,7 @@ function edit (i){
 
 //Elimina la transaccion
 function del(i) {
-    users = users.
+    listaDeTransacciones = listaDeTransacciones.
     filter((e,index) => i!=index);
     render();
 }
@@ -35,26 +50,27 @@ function del(i) {
 //Guarda la informacion de las transacciones en el localStorage
 function saveData (){
     localStorage.setItem("balance", saldoTotal);
-    localStorage.setItem("list", JSON.stringify(users));
+    localStorage.setItem("list", JSON.stringify(listaDeTransacciones));
 }
+
 function loadData(){
     saveData()
-    users = JSON.parse(localStorage.getItem("list"));
+    listaDeTransacciones = JSON.parse(localStorage.getItem("list"));
     saldoTotal = Number(localStorage.getItem("balance"));
 }
 
 function render() {
-    saldoTotal = users.reduce(
+    saldoTotal = listaDeTransacciones.reduce(
     (total, value) => {
     return value.type == "gastos" ? total - value.monto : total + value.monto} 
     , 0 )
 
     listTransac.innerHTML = "";
-    if(users.length  === 0 ){
+    if(listaDeTransacciones.length  === 0 ){
         listTransac.innerHTML = "Sin transacciones"
     }
     else{
-        users.forEach((e,i) => {
+        listaDeTransacciones.forEach((e,i) => {
             listTransac.innerHTML += `
             <li id="bloqueTransci" class="transaction ${e.type}">
             <p>${e.nombre}</p>
@@ -101,8 +117,8 @@ guardarButton.addEventListener (`click`, (e) => {
         type : ingresos.checked? "ingresos" : "gastos"
     };
 
-    if(editIndex ==-1) users.push(transaction);
-    else {users[editIndex] =transaction;
+    if(editIndex ==-1) listaDeTransacciones.push(transaction);
+    else listaDeTransacciones[editIndex] =transaction;
     Toastify({
         text: "Se realizo una transacción con éxito",
         duration: 3000,
@@ -116,7 +132,6 @@ guardarButton.addEventListener (`click`, (e) => {
         background: "linear-gradient(to top, #11998e, #38ef7d)",
         },
     }).showToast();
-}
 
     editIndex =-1;
     nombres.value="";
