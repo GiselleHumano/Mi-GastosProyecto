@@ -12,7 +12,7 @@ window.onload = () => {
         duration: 3000,
         close: true,
         gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
+        position: "center", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
             background: "linear-gradient(to top, #373b44, #4286f4)",

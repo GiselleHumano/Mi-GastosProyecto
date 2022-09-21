@@ -1,4 +1,4 @@
-//de register a login
+//de formUser a login
 const login = document.getElementById("login")
 const register = document.getElementById("register") 
 
@@ -11,31 +11,49 @@ document.addEventListener(`click`, e => {
         login.style.display = `block`;
     }
 }) 
+/*-----------------------------------------------------------------------------------------------*/
 
-//Register
+//alerta para iniciar sesión
+Toastify({
+    text: "Por favor, inicie sesión para poder acceder",
+    duration: 3000,
+    //destination: "https://github.com/apvarun/toastify-js",
+    //newWindow: false,
+    close: true,
+    gravity: "top", 
+    position: "center", 
+    stopOnFocus: true, 
+    style: {
+    background:  "linear-gradient(to top, #373b44, #4286f4)",
+    },
+}).showToast();
+
+
+//Register - Para que el usuario se registre y quede en el local storage
 class User {
-    constructor(usuario, password, reapetPassword) {
-        this.usuario = usuario
+    constructor(username, password, reapetPassword) {
+        this.username = username
         this.password = password
         this.reapetPassword = reapetPassword
     }
 }
 
 const users = JSON.parse(localStorage.getItem("users")) ?? []
-const formRegister = document.getElementById("formRegister")
-const alertError = document.getElementById("alertError")
+const formUser = document.getElementById("formUser")
+const mensajeError = document.getElementById("mensajeError")
 
 //Datos que ingresa el usuario
-formRegister .addEventListener("submit", (e) => {
+formUser.addEventListener("submit", (e) => {
     e.preventDefault()
-    const usuario = document.getElementById("usuario").value
-    const password = document.getElementById("pw").value
-    const reapetPassword = document.getElementById("pw2").value
-    const user = new User(usuario, password, reapetPassword)
+    const username = document.getElementById("username").value
+    const password = document.getElementById("password").value
+    const reapetPassword = document.getElementById("reapetPassword").value
+    const user = new User(username, password, reapetPassword)
     users.push(user)
-    formRegister .reset()
 
-    if (usuario == "", password == "", reapetPassword == "") {
+    formUser.reset()
+
+    if (username == "", password == "", reapetPassword == "") {
         Toastify({
             text: "Complete todos los campos para poder registrarse",
             duration: 3000,
@@ -63,54 +81,56 @@ formRegister .addEventListener("submit", (e) => {
             background: "linear-gradient(to bottom, #fe8c00, #f83600)",
             },
         }).showToast();
+
 // Si el Login es valido guarda los datos del usuario en el localStorage.
+
     } else {
-        window.location.href = "./app/app.html"
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        Toast.fire({
+            icon: 'success',
+            title: 'Se registro con exito'
+        })
         localStorage.setItem("users", JSON.stringify(users))
-        Toastify({
-            text: "Usted se registro con exito",
-            duration: 3000,
-            //destination: "https://github.com/apvarun/toastify-js",
-            //newWindow: false,
-            close: true,
-            gravity: "bottom", 
-            position: "right", 
-            stopOnFocus: true, 
-            style: {
-            background: "linear-gradient(to bottom, #fe8c00, #f83600)",
-            },
-        }).showToast();
     }
 })
 
-//Login
-class LoginUsers {
-    constructor(loginUser, loginPw) {
-        this.loginUser = loginUser
-        this.loginPw = loginPw 
-}}
+
+//Login - Para que el usuario ingrese los datos correspondientes
+class AddUsers {
+    constructor(loginName, loginpw) {
+        this.loginName = loginName
+        this.loginpw = loginpw
+    }
+}
 
 const usersRegistro = JSON.parse(localStorage.getItem("users")) ?? []
-const loginUsers = JSON.parse(localStorage.getItem("loginUsers")) ?? []
-const loginForm = document.getElementById("loginForm")
-const dataError = document.getElementById("dataError")
+const addUsers = JSON.parse(localStorage.getItem("addUsers")) ?? []
+const formUserLogin = document.getElementById("formUserLogin")
 
 //Requerimientos de datos que ingreso el usuario User/PW
-loginForm.addEventListener("submit", (e) => {
+formUserLogin.addEventListener("submit", (e) => {
     e.preventDefault()
-    const loginUser = document.getElementById("loginUser").value
-    const loginPw = document.getElementById("loginPw").value
+    const loginName = document.getElementById("loginName").value
+    const loginpw = document.getElementById("loginpw").value
+    const addUser = new AddUsers(loginName, loginpw)
+    addUsers.push(addUser)
+    formUserLogin.reset()
 
-    const LoginUsers = new LoginUsers (loginUser,loginPw)
-    loginUsers.push(loginUsers)
+// Comparación de datos 
+    const findName = usersRegistro.find(users => users.username == loginName)
+    const fingPass = usersRegistro.find(users => users.password == loginpw)
 
-// Comparación de datos Login/Register
-
-loginForm.reset()
-    const okUser = usersRegistro.find(users => users.usuario == loginUser)
-    const okPass = usersRegistro.find(users => users.password == loginPw)
-
-    if (loginUser == "" || loginPw == "") {
+    if (loginName == "" || loginpw == "") {
         Toastify({
             text: "Falta llenar campos",
             duration: 3000,
@@ -125,9 +145,9 @@ loginForm.reset()
             },
         }).showToast();
 
-    } else if (okUser == undefined || okPass == undefined) {
+    } else if (findName == undefined || fingPass == undefined) {
         Toastify({
-            text: "El usuario o la contraseña son incorrectos",
+            text: "Usuario o contraseña incorrectos",
             duration: 3000,
             //destination: "https://github.com/apvarun/toastify-js",
             //newWindow: false,
@@ -140,8 +160,10 @@ loginForm.reset()
             },
         }).showToast();
 
-    } else if (loginUser == okUser["username"] && loginPw == okPass["password"]) {
+    } else if (loginName == findName["username"] && loginpw == fingPass["password"]) 
+    {
         window.location.href = "./app/app.html"
-        localStorage.setItem("loginUsers", JSON.stringify(loginUsers))
+        localStorage.setItem("addUsers", JSON.stringify(addUsers))
     }
+
 })
