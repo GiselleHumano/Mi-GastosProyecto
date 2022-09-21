@@ -25,7 +25,21 @@ let listaDeTransacciones = [];
 let saldoTotal = 0;
 let editIndex =-1 // para que la transaccion anterior sea remplazada en la edicion
 
+//Guarda la informacion de las transacciones en el localStorage
 saldoTotal = Number(localStorage.getItem("balance")) || 0;
+listaDeTransacciones = JSON.parse(localStorage.getItem("list")) || [];
+
+const saveStatus = () => {
+    localStorage.setItem("balance", saldoTotal);
+    localStorage.setItem("list", JSON.stringify(listaDeTransacciones));
+} 
+
+//Elimina la transaccion
+function del(i) {
+    listaDeTransacciones = listaDeTransacciones.
+    filter((e,index) => i!=index);
+    render();
+}
 
 //Edita la transaccion
 function edit (i){
@@ -38,25 +52,6 @@ function edit (i){
     else{
         gastos.checked = true;
     }
-}
-
-//Elimina la transaccion
-function del(i) {
-    listaDeTransacciones = listaDeTransacciones.
-    filter((e,index) => i!=index);
-    render();
-}
-
-//Guarda la informacion de las transacciones en el localStorage
-function saveData (){
-    localStorage.setItem("balance", saldoTotal);
-    localStorage.setItem("list", JSON.stringify(listaDeTransacciones));
-}
-
-function loadData(){
-    saveData()
-    listaDeTransacciones = JSON.parse(localStorage.getItem("list"));
-    saldoTotal = Number(localStorage.getItem("balance"));
 }
 
 function render() {
@@ -88,9 +83,10 @@ function render() {
         })
     }
     balances.innerHTML = saldoTotal;
-    saveData();
 }
 
+render();
+saveStatus();
 // "alerta" si no se llenan los campos
 guardarButton.addEventListener (`click`, (e) => {
     if(nombres.value == "" || 
@@ -118,7 +114,7 @@ guardarButton.addEventListener (`click`, (e) => {
     };
 
     if(editIndex ==-1) listaDeTransacciones.push(transaction);
-    else listaDeTransacciones[editIndex] =transaction;
+    else {listaDeTransacciones[editIndex] =transaction;
     Toastify({
         text: "Se realizo una transacción con éxito",
         duration: 3000,
@@ -132,12 +128,9 @@ guardarButton.addEventListener (`click`, (e) => {
         background: "linear-gradient(to top, #11998e, #38ef7d)",
         },
     }).showToast();
-
-    editIndex =-1;
+}
     nombres.value="";
     montos.value ="";
     render();
+    saveStatus();
 })
-
-loadData();
-render();
